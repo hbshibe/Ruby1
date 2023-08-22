@@ -1,23 +1,17 @@
 require "csv"
 
 puts "1 → 新規でメモを作成する / 2 → 既存のメモを編集する"
-
-memo_type = gets.to_i
+memo_type = gets.chomp.to_i
 
 if memo_type == 1
   puts "拡張子を除いたファイル名を入力してください:"
   filename = gets.chomp + ".csv"
   puts "メモしたい内容を記入してください:"
-  puts "完了したらcommand + Dを押します"
-  content = []
-  while (line = gets) != "\x04\n"
-    content << line.chomp
-  end
-
+  puts "完了したらCtrl+D（またはcommand+D）を押します"
+  content = $stdin.read.chomp
+  
   CSV.open(filename, 'w') do |csv|
-    content.each do |line|
-      csv << [line]
-    end
+    csv << [content]
   end
 
   puts "メモが保存されました。"
@@ -33,16 +27,11 @@ elsif memo_type == 2
     end
     
     puts "新しい内容を記入してください:"
-    puts "完了したらcommand + Dを押します"
-    content = []
-    while (line = gets) != "\x04\n"
-      content << line.chomp
-    end
+    puts "完了したらCtrl+D（またはcommand+D）を押します"
+    content = $stdin.read.chomp
     
     CSV.open(filename, 'w') do |csv|
-      content.each do |line|
-        csv << [line]
-      end
+      csv << [content]
     end
 
     puts "メモが更新されました。"
