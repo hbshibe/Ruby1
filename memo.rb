@@ -5,7 +5,7 @@ memo_type = gets.chomp.to_i
 
 if memo_type == 1
   puts "拡張子を除いたファイル名を入力してください:"
-  filename = gets.chomp + ".csv"
+  filename = gets.chomp
   puts "メモしたい内容を記入してください:"
   
   puts "メモの内容を記入して下さい。Ctrl+Dで保存します。"
